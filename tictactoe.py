@@ -16,6 +16,13 @@ def print_map():
     print('| 6 | 7 | 8 |')
     print('----|---|----')
 
+def print_winner(board, winner):
+    print()
+    print_board(board)  # Display the final board
+    print()
+    print(winner, 'has won!')  # Show which player won
+    print()
+
 def turn(player):
     while True:
         # Ask the player for the number of the square they want to choose
@@ -84,8 +91,7 @@ while True:  # We will break out of this loop when the game ends
     # Check if someone has won
     winner = get_winner(board)
     if winner is not None:
-        print()
-        print(winner, 'has won!')
+        print_winner(board, winner)
         break
 
     # Do the same thing for O's turn
@@ -96,6 +102,5 @@ while True:  # We will break out of this loop when the game ends
     # Check if someone has won
     winner = get_winner(board)
     if winner is not None:
-        print()
-        print(winner, 'has won!')
+        print_winner(board, winner)
         break
