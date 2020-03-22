@@ -17,17 +17,17 @@ def print_board(board):
 
 def print_map():
     print('----|---|----')
-    print('| 1 | 2 | 3 |')
+    print('| 0 | 1 | 2 |')
     print('----|---|----')
-    print('| 4 | 5 | 6 |')
+    print('| 3 | 4 | 5 |')
     print('----|---|----')
-    print('| 7 | 8 | 9 |')
+    print('| 6 | 7 | 8 |')
     print('----|---|----')
 
 def turn(player):
     while True:
         # Ask the player for the number of the square they want to choose
-        str_choice = input(player + ': Where do you want to move? [1-9] ')
+        str_choice = input(player + ': Where do you want to move? [0-8] ')
 
         try:
             # Attempt to convert the input to an integer
@@ -37,12 +37,10 @@ def turn(player):
             print('Please select a number!')
         else:
             # A valid number was entered
-            if choice >= 1 and choice <= 9:
+            if choice >= 0 and choice <= 8:
                 # Check whether this tile is taken
-                if board[choice - 1] == ' ':
+                if board[choice] == ' ':
                     # This selection is allowed!
-                    # Subtract 1 because Python counts from 0
-                    choice -= 1
                     # Replace the chosen tile with the player's symbol
                     board[choice] = player
                     return  # End the running of this function and loop
@@ -51,7 +49,7 @@ def turn(player):
                     print('Someone has already moved there!')
             else:
                 # Number is not between 1 and 9
-                print('You must select a number between 1 and 9!')
+                print('You must select a number between 0 and 8!')
 
 
 # Show the players which number corresponds to which square
