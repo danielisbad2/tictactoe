@@ -28,7 +28,7 @@ def turn(player):
     while True:
         # Ask the player for the number of the square they want to choose
         str_choice = input(player + ': Where do you want to move? [1-9] ')
-        
+
         try:
             # Attempt to convert the input to an integer
             choice = int(str_choice)
@@ -38,15 +38,20 @@ def turn(player):
         else:
             # A valid number was entered
             if choice >= 1 and choice <= 9:
-                # This selection is allowed!
-                # Subtract 1 because Python counts from 0
-                choice -= 1
-                # Replace the chosen tile with the player's symbol
-                board[choice] = player
-                return  # End the running of this function and loop
+                # Check whether this tile is taken
+                if board[choice - 1] == ' ':
+                    # This selection is allowed!
+                    # Subtract 1 because Python counts from 0
+                    choice -= 1
+                    # Replace the chosen tile with the player's symbol
+                    board[choice] = player
+                    return  # End the running of this function and loop
+                else:
+                    # This tile has already been claimed
+                    print('Someone has already moved there!')
             else:
                 # Number is not between 1 and 9
-                print('You must select a number between 1 and 9')
+                print('You must select a number between 1 and 9!')
 
 
 # Show the players which number corresponds to which square
