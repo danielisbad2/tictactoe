@@ -25,12 +25,28 @@ def print_map():
     print('----|---|----')
 
 def turn(player):
-    # Ask the player for the number of the square they want to choose
-    choice = int(input(player + ': Where do you want to move? [1-9] '))
-    choice -= 1  # Subtract 1 because Python counts from 0
-
-    # Replace the chosen tile with the player's symbol
-    board[choice] = player
+    while True:
+        # Ask the player for the number of the square they want to choose
+        str_choice = input(player + ': Where do you want to move? [1-9] ')
+        
+        try:
+            # Attempt to convert the input to an integer
+            choice = int(str_choice)
+        except ValueError:
+            # They did not input a valid number
+            print('Please select a number!')
+        else:
+            # A valid number was entered
+            if choice >= 1 and choice <= 9:
+                # This selection is allowed!
+                # Subtract 1 because Python counts from 0
+                choice -= 1
+                # Replace the chosen tile with the player's symbol
+                board[choice] = player
+                return  # End the running of this function and loop
+            else:
+                # Number is not between 1 and 9
+                print('You must select a number between 1 and 9')
 
 
 # Show the players which number corresponds to which square
