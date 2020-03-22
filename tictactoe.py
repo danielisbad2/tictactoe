@@ -1,11 +1,3 @@
-# The board is stored as a list of 9 letters:
-# The first 3 form the first row,
-# The next 3 are the second row,
-# and the final 3 are the last row.
-# We start with 9 spaces to represent empty squares.
-board = [' ' for i in range(9)]
-
-
 def print_board(board):
     print('----|---|----')
     print('|', board[0], '|', board[1], '|', board[2], '|')
@@ -51,6 +43,35 @@ def turn(player):
                 # Number is not between 1 and 9
                 print('You must select a number between 0 and 8!')
 
+def is_winner(bo, pl):
+    # Check if player `pl` has won, with board being shortened to `bo`
+    return (
+        (bo[0] == pl and bo[1] == pl and bo[2] == pl) or  # Across the top
+        (bo[3] == pl and bo[4] == pl and bo[5] == pl) or  # Across the middle
+        (bo[6] == pl and bo[7] == pl and bo[8] == pl) or  # Across the bottom
+        (bo[0] == pl and bo[3] == pl and bo[6] == pl) or  # Down the left side
+        (bo[1] == pl and bo[4] == pl and bo[7] == pl) or  # Down the middle
+        (bo[2] == pl and bo[5] == pl and bo[8] == pl) or  # Down the right side
+        (bo[0] == pl and bo[4] == pl and bo[8] == pl) or  # Diagonal
+        (bo[2] == pl and bo[4] == pl and bo[6] == pl)     # Diagonal
+    )
+
+def get_winner(board):
+    # Check if either player has won
+    if is_winner(board, 'X'):
+        return 'X'
+    elif is_winner(board, 'O'):
+        return 'O'
+    else:
+        return None
+
+
+# The board is stored as a list of 9 letters:
+# The first 3 form the first row,
+# The next 3 are the second row,
+# and the final 3 are the last row.
+# We start with 9 spaces to represent empty squares.
+board = [' ' for i in range(9)]
 
 # Show the players which number corresponds to which square
 print_map()
@@ -60,7 +81,21 @@ while True:  # We will break out of this loop when the game ends
     print_board(board)  # Show the current board
     turn('X')  # Allow X to move
 
+    # Check if someone has won
+    winner = get_winner(board)
+    if winner is not None:
+        print()
+        print(winner, 'has won!')
+        break
+
     # Do the same thing for O's turn
     print()
     print_board(board)
     turn('O')
+
+    # Check if someone has won
+    winner = get_winner(board)
+    if winner is not None:
+        print()
+        print(winner, 'has won!')
+        break
