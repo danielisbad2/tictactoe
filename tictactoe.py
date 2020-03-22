@@ -69,6 +69,9 @@ def get_winner(board):
         return 'X'
     elif is_winner(board, 'O'):
         return 'O'
+    elif all([x != ' ' for x in board]):
+        # The board is full, but nobody has won (a draw)
+        return 'Nobody'
     else:
         return None
 
