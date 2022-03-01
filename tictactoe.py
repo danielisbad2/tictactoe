@@ -95,7 +95,6 @@ while True:  # We will break out of this loop when the game ends
     winner = get_winner(board)
     if winner is not None:
         print_winner(board, winner)
-        break
 
     # Do the same thing for O's turn
     print()
@@ -106,4 +105,3 @@ while True:  # We will break out of this loop when the game ends
     winner = get_winner(board)
     if winner is not None:
         print_winner(board, winner)
-        break
